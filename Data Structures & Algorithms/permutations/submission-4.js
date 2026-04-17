@@ -1,0 +1,28 @@
+class Solution {
+    /**
+     * @param {number[]} nums
+     * @return {number[][]}
+     */
+    permute(nums) {
+        const res = [];
+        dfs([], new Array(nums.length).fill(false));
+        return res;
+
+        function dfs(cur, picked) {
+            if (cur.length === nums.length) {
+                res.push([...cur]);
+                return;
+            }
+
+            for (let i = 0; i < nums.length; i++) {
+                if (picked[i]) continue;
+
+                cur.push(nums[i]);
+                picked[i] = true;
+                dfs(cur, picked);
+                cur.pop();
+                picked[i] = false;
+            }
+        }
+    }
+}
